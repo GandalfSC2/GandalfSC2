@@ -1,0 +1,66 @@
+security:
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#c-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            jwt: ~
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator: App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # Il faut être connecté (ROLE_USER) pour afficher les pages /tvshow
+        # - { path: ^/tvshow, roles: ROLE_USER }
+
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
+        # Il faut avoir le rôle ROLE_ADMIN pour afficher le backoffice
+        - { path: ^/backoffice, roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        # Un ROLE_ADMIN peut faire, tout ce que fait un ROLE_USER
+        ROLE_ADMIN: ROLE_USER
+
+        # Un ROLE_SUPER_ADMIN peut faire, tout ce que fait un ROLE_ADMIN
+        ROLE_SUPER_ADMIN : ROLE_ADMIN

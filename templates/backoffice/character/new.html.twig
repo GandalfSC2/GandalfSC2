@@ -1,0 +1,14 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}New Character
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Nouveau personnage</h1>
+
+        {{ include('backoffice/character/_form.html.twig') }}
+
+        <a href="{{ path('backoffice_character_index') }}">back to list</a>
+    </div>
+{% endblock %}

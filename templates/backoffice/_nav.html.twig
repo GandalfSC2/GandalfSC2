@@ -1,0 +1,34 @@
+<!-- Menu de navigation -->
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link{{ 'backoffice_index' in currentRoute ? ' active':'' }}" href="{{path('backoffice_index')}}">
+            <span data-feather="home"></span>
+            Accueil
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{{ 'backoffice_tvshow' in currentRoute ? ' active':'' }}" href="{{path('backoffice_tvshow_index')}}">
+            <span data-feather="file"></span>
+            Séries
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{{ 'backoffice_category' in currentRoute ? ' active':'' }}" href="{{path('backoffice_category_index')}}">
+            <span data-feather="file"></span>
+            Catégories
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{{ 'backoffice_character' in currentRoute ? ' active':'' }}" href="{{path('backoffice_character_index')}}">
+            <span data-feather="file"></span>
+            Personnages
+        </a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li class="nav-item">
+        <a class="nav-link{{ 'backoffice_user' in currentRoute ? ' active':'' }}" href="{{path('backoffice_user_index')}}">
+            <span data-feather="file"></span>
+            Utilisateurs
+        </a>
+    </li>
+</ul>

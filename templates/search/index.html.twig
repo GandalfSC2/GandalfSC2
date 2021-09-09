@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Résultats de la recherche
+    {{query}}
+    -
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h2>
+        Résultats de la recherche
+        <em>{{query}}</em>
+    </h2>
+    <ul>
+        {% for tvShow in results %}
+            <li>{{ tvShow.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

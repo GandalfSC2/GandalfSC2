@@ -1,0 +1,51 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Character
+{% endblock %}
+
+{% block content %}
+    <h1>Character</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ character.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ character.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ character.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ character.gender }}</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td>{{ character.bio }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ character.age }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ character.createdAt ? character.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ character.updatedAt ? character.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_character_index') }}">back to list</a>
+
+    <a href="{{ path('backoffice_character_edit', {'id': character.id}) }}">edit</a>
+
+    {{ include('backoffice/character/_delete_form.html.twig') }}
+{% endblock %}

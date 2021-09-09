@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h2>Erreur 404 - Cette ressource n'existe pas</h2>
+    <p>
+        {{exception.message}}
+        <img src="https://www.darty.com/darty-et-vous/sites/default/files/thumbnails/image/cassettes-vhs_0.jpg" alt="Video cassette">
+    </p>
+
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+
+{% endblock %}
