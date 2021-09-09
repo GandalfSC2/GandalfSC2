@@ -1,0 +1,20 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Edit TvShow
+{% endblock %}
+
+{% block content %}
+    <h1>Edit TvShow</h1>
+
+    <p>
+        <a href="{{ path('backoffice_season_index', {id:tv_show.id}) }}">Toutes les saisons</a>
+        |
+        <a href="{{ path('backoffice_season_add', {id:tv_show.id}) }}">Ajouter une saison</a>
+    </p>
+
+    {{ include('backoffice/tv_show/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('backoffice_tvshow_index') }}">back to list</a>
+
+    {{ include('backoffice/tv_show/_delete_form.html.twig') }}
+{% endblock %}

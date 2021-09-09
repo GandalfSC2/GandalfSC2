@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ tvShow.title }}
+    -
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+
+        <section class="py-5 text-center container">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">{{ tvShow.title }}</h1>
+                    <img class="my-3" src="{{ 'http' in tvShow.image ? tvShow.image : asset('uploads/' ~ tvShow.image) }}" alt="Affiche de la série {{tvShow.title}}" height="400">
+                    <p class="lead text-muted">
+                        {% for season in tvShow.seasons %}
+                            <a href="#">
+                                <span class="badge bg-secondary">
+                                    Saison
+                                    {{ season.seasonNumber }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </p>
+                    <p class="lead text-muted">
+                        {% for category in tvShow.categories %}
+                            <a href="#">
+                                <span class="badge bg-dark">
+                                    {{ category.name }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </p>
+                    <p class="lead text-muted">
+                        Avec :
+                        {% for character in tvShow.characters %}
+                            <a href="#">
+                                {{ character.firstname }}
+                                {{ character.lastname }}
+                            </a>
+                            {% if not loop.last %}
+                                ,
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="py-5 bg-light">
+            <div class="container">
+                <p>
+                    Après les aventures de Jango et Boba Fett, un nouveau héros émerge dans l'univers Star Wars. L'intrigue, située entre la chute de l'Empire et l'émergence du Premier Ordre, suit les voyages d'un chasseur de primes solitaire dans les contrées les plus éloignées
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            de la Galaxie, loin de l’autorité de la Nouvelle République.
+                </p>
+            </div>
+        </div>
+
+        <p>
+            <a href="{{ path('tvshow_index') }}">Retour à la liste</a>
+        </p>
+    </main>
+
+
+{% endblock %}

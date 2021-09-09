@@ -1,0 +1,29 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}Hello SeasonController!
+{% endblock %}
+
+{% block content %}
+    <h2>{{ tvShow.title }}</h2>
+
+    <h3>Saisons</h3>
+    <p>
+        <a href="{{ path('backoffice_season_add', {id:tvShow.id}) }}">Ajouter une saison</a>
+    </p>
+    <ul>
+        {% for season in tvShow.seasons %}
+            <li>
+                Saison
+                {{ season.seasonNumber }}
+                -
+                <a href="{{ path('backoffice_episode_add', {id:season.id}) }}">Ajouter un épisode</a>
+
+                <ul>
+                    {% for episode in season.episodes %}
+                        <li>{{ episode.title }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

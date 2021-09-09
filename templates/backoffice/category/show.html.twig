@@ -1,0 +1,20 @@
+{% extends "backoffice/layout.html.twig" %}
+
+{% block content %}
+
+    <h3>
+        Categorie
+        {{ category.name }}
+    </h3>
+
+    <p>
+        <a href="{{ path('backoffice_category_edit', {id:category.id}) }}">Editer</a>
+        |
+        <a href="{{ path('backoffice_category_delete', {id:category.id}) }}" onclick="return confirm('Êtes-vous sur de vouloir effectuer cette action ?');">Supprimer</a>
+    </p>
+
+    <p>
+        <a href="{{ path('backoffice_category_index') }}">Retour à la liste</a>
+    </p>
+
+{% endblock %}

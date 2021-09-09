@@ -1,0 +1,13 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}
+Nouvel utilisateur | {{parent()}}
+{% endblock %}
+
+{% block content %}
+    <h1>Nouvel utilisateur</h1>
+
+    {{ include('backoffice/user/_form.html.twig') }}
+
+    <a href="{{ path('backoffice_user_index') }}">back to list</a>
+{% endblock %}

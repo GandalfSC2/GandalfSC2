@@ -1,0 +1,54 @@
+{% extends 'backoffice/layout.html.twig' %}
+
+{% block title %}TvShow index
+{% endblock %}
+
+{% block content %}
+    <h1>TvShow index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Synopsis</th>
+                <th>Image</th>
+                <th>NbLikes</th>
+                <th>PublishedAt</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tv_show in tv_shows %}
+                <tr>
+                    <td>{{ tv_show.id }}</td>
+                    <td>{{ tv_show.title }}</td>
+                    <td>{{ tv_show.synopsis | u.truncate(80, '...')  }}</td>
+                    <td>
+                        {% if "http" in tv_show.image %}
+                            <img src="{{ tv_show.image }}" width="100">
+                        {% else %}
+                            <img src="{{ asset('uploads/' ~ tv_show.image) }}" width="100">
+                        {% endif %}
+                    </td>
+                    <td>{{ tv_show.nbLikes }}</td>
+                    <td>{{ tv_show.publishedAt ? tv_show.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ tv_show.createdAt ? tv_show.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ tv_show.updatedAt ? tv_show.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('backoffice_tvshow_show', {'id': tv_show.id}) }}">show</a>
+                        <a href="{{ path('backoffice_tvshow_edit', {'id': tv_show.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backoffice_tvshow_new') }}">Create new</a>
+{% endblock %}
